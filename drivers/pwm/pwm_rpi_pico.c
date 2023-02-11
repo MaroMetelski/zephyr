@@ -118,9 +118,36 @@ static int pwm_rpi_set_cycles(const struct device *dev, uint32_t ch, uint32_t pe
 	return 0;
 };
 
+#ifdef CONFIG_PWM_CAPTURE
+static int pwm_rpi_enable_capture(const struct device *dev, uint32_t channel)
+{
+
+
+};
+
+static int pwm_rpi_disable_capture(const struct device *dev, uint32_t channel)
+{
+
+
+};
+
+static int pwm_rpi_configure_capture(const struct device *dev, uint32_t channel,
+				pwm_flags_t flags, pwm_capture_callback_handler_t cb, void *user_data)
+{
+
+
+};
+
+#endif  // CONFIG_PWM_CAPTURE
+
 struct pwm_driver_api pwm_rpi_driver_api = {
 	.get_cycles_per_sec = pwm_rpi_get_cycles_per_sec,
 	.set_cycles = pwm_rpi_set_cycles,
+#ifdef CONFIG_PWM_CAPTURE
+	.configure_capture = pwm_rpi_configure_capture,
+	.disable_capture = pwm_rpi_disable_capture,
+	.enable_capture = pwm_rpi_enable_capture,
+#endif  // CONFIG_PWM_CAPTURE
 };
 
 static int pwm_rpi_init(const struct device *dev)
